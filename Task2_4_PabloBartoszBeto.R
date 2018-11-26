@@ -107,6 +107,7 @@ itemLabels(transactionsData)
 #[125] "iPhone Charger Cable"   
 
 
+
 newLabels<- c("ExternalHD-1TB Portable External Hard Drive","ExternalHD-2TB Portable External Hard Drive","Computer Mice-3Button Mouse","ExternalHD-3TB Portable External Hard Drive",
               "ExternalHD-5TB Desktop Hard Drive","Monitors-AOC Monitor","ActiveHeadphones-APIE Bluetooth Headphone","Monitors-ASUS 2 Monitor","Laptops-ASUS Chromebook","Desktops-ASUS Desktop",
               "Monitors-ASUS Monitor","Laptops-Acer Aspire","Desktops-Acer Desktop","Monitors-Acer Monitor","ComputerHeadphones-Ailihen Stereo Headphones","Laptops-Alienware Laptop","ActiveHeadphones-Apple Earpods",
@@ -140,12 +141,14 @@ itemLabels(transactionsData)
 #sub("\\s+$", "", str, perl = TRUE) ## PCRE-style white space
 
 categories<-as.factor(sub("\\-.*", "", newLabels)) #read more about this 
-
+categories2<-(sub("\\-.*", "", newLabels))
+repitedCategories <- transactionsData
+repitedCategories@itemInfo$labels<-categories2
 
 
 categories
 str(categories)
-  transactionsData@itemInfo$cat<-categories
+  transactionsData@itemInfo$cat2<-categories2
 
 
 CategoriesTransaction<- aggregate(transactionsData, transactionsData@itemInfo[["cat"]])
@@ -156,9 +159,10 @@ itemLabels(CategoriesTransaction)
 
 
 
+
 ByCategoriesDL<- apriori(CategoriesTransaction,parameter = list(support=0.05,conf=0.5),
                          appearance = list(rhs=c("Desktops"),lhs=c("Accessories","ActiveHeadphones","Cartridge","Computer Mice","ComputerCords","ComputerHeadphones","ExternalHD",
-                                                                   "Keyboards","MKCombo","Monitors","Printers","SmartHomeDevices","Software","Speakers","Stands","Tablets" ),
+                                                                   "Keyboards","MKCombo","Monitors","Printers","SmartHomeDevices","Software","Speakers","Stands","Tablets", "Laptops" ),
                                            default="none"))
 
 inspect(head(sort(ByCategoriesDL,by="support"),20))
@@ -169,10 +173,11 @@ categoriesNames <- c("Accessories","ActiveHeadphones","Cartridge","Computer Mice
                      "ComputerHeadphones","ExternalHD", "Laptops","Keyboards","MKCombo","Monitors",
                      "Printers","SmartHomeDevices","Software","Speakers","Stands","Tablets", "Desktops")
 
-# Rules by category predicted
+
+############### Rules by category predicted #################
 
 for(i in 1:length(categoriesNames)){
-  ByCategories[[i]] <- apriori(CategoriesTransaction,parameter = list(support=0.05,conf=0.5),
+  ByCategories[[i]] <- apriori(CategoriesTransaction, parameter = list(support=0.05,conf=0.5),
                                appearance = list(rhs=categoriesNames[i],lhs=categoriesNames[-i],default="none"))
   inspect(head(sort(ByCategories[[i]],by="lift"),20))
 }
@@ -180,18 +185,20 @@ names(ByCategories) <- categoriesNames
 
 
 
+############### Bussiness Data Set ##############
+
 bussiness <- c()
 m=1L
 for (m in 1:nrow(transactionsData)){
   #trasactionsvector <- unname(unlist(CategoriesTransaction[m]))
-  item = size(CategoriesTransaction[m])
-  c=length(grep("Monitors", LIST(CategoriesTransaction)[m]))+length(grep("Desktops", LIST(CategoriesTransaction)[m]))+length(grep("Laptops", LIST(CategoriesTransaction)[m]))
-  p=length(grep("Printers", LIST(CategoriesTransaction)[[m]]))
-  s=length(grep("Software", LIST(CategoriesTransaction)[[m]]))
-  st=length(grep("Stands", LIST(CategoriesTransaction)[[m]]))
-  mk=length(grep("Keyboards", LIST(CategoriesTransaction)[[m]]))+length(grep("MKCombo", LIST(CategoriesTransaction)[[m]]))+length(grep("Computer Mice", LIST(CategoriesTransaction)[[m]]))
-  t=length(grep("Tablets", LIST(CategoriesTransaction)[[m]]))
-  hd=length(grep("ExternalHD", LIST(CategoriesTransaction)[[m]]))
+  item = length(transactionsData[m])
+  c=length(grep("Monitors", LIST(repitedCategories)[m]))+length(grep("Desktops", LIST(repitedCategories)[m]))+length(grep("Laptops", LIST(repitedCategories)[m]))
+  p=length(grep("Printers", LIST(repitedCategories)[[m]]))
+  s=length(grep("Software", LIST(repitedCategories)[[m]]))
+  st=length(grep("Stands", LIST(repitedCategories)[[m]]))
+  mk=length(grep("Keyboards", LIST(repitedCategories)[[m]]))+length(grep("MKCombo", LIST(repitedCategories)[[m]]))+length(grep("Computer Mice", LIST(repitedCategories)[[m]]))
+  t=length(grep("Tablets", LIST(repitedCategories)[[m]]))
+  hd=length(grep("ExternalHD", LIST(repitedCategories)[[m]]))
   
   
   
@@ -201,21 +208,23 @@ for (m in 1:nrow(transactionsData)){
 }
 
 
-estimatedProfit <- c()
+################ Estimated Profit #######################
 
-for (n in 1:nrow(transactionsData)){
+estimatedProfit <- c()
+n=1L
+for (m in 1:nrow(transactionsData)){
   
-  price=527.79*length(grep("Monitors", LIST(CategoriesTransaction)[m]))+736.34*length(grep("Desktops", LIST(CategoriesTransaction)[m]))+
-    772.73*length(grep("Laptops", LIST(CategoriesTransaction)[m]))+42.77*length(grep("Accesories", LIST(CategoriesTransaction)[m]))+
-    42.77*length(grep("Stands", LIST(CategoriesTransaction)[m]))+42.77*length(grep("Computer Mice", LIST(CategoriesTransaction)[m]))+
-    42.77*length(grep("ComputerCords", LIST(CategoriesTransaction)[m]))+42.77*length(grep("ComputerHeadphones", LIST(CategoriesTransaction)[m]))+
-    42.77*length(grep("ActiveHeadphones", LIST(CategoriesTransaction)[m]))+203.89*length(grep("Printers", LIST(CategoriesTransaction)[m]))+
-    497.99*length(grep("Tablets", LIST(CategoriesTransaction)[m]))+34.25*length(grep("Cartridge", LIST(CategoriesTransaction)[m]))+
-    93.98*length(grep("Software", LIST(CategoriesTransaction)[m]))+42.77*length(grep("Keyboards", LIST(CategoriesTransaction)[m]))+
-    42.77*length(grep("MKCombo", LIST(CategoriesTransaction)[m]))+42.77*length(grep("ExternalHD", LIST(CategoriesTransaction)[m]))+
-    200*length(grep("SmartHomeDevices", LIST(CategoriesTransaction)[m]))+70*length(grep("Speakers", LIST(CategoriesTransaction)[m]))
+  price=527.79*length(grep("Monitors", LIST(repitedCategories)[m]))+736.34*length(grep("Desktops", LIST(repitedCategories)[m]))+
+    772.73*length(grep("Laptops", LIST(repitedCategories)[m]))+42.77*length(grep("Accesories", LIST(repitedCategories)[m]))+
+    42.77*length(grep("Stands", LIST(repitedCategories)[m]))+42.77*length(grep("Computer Mice", LIST(repitedCategories)[m]))+
+    42.77*length(grep("ComputerCords", LIST(repitedCategories)[m]))+42.77*length(grep("ComputerHeadphones", LIST(repitedCategories)[m]))+
+    42.77*length(grep("ActiveHeadphones", LIST(repitedCategories)[m]))+203.89*length(grep("Printers", LIST(repitedCategories)[m]))+
+    497.99*length(grep("Tablets", LIST(repitedCategories)[m]))+34.25*length(grep("Cartridge", LIST(repitedCategories)[m]))+
+    93.98*length(grep("Software", LIST(repitedCategories)[m]))+42.77*length(grep("Keyboards", LIST(repitedCategories)[m]))+
+    42.77*length(grep("MKCombo", LIST(repitedCategories)[m]))+42.77*length(grep("ExternalHD", LIST(repitedCategories)[m]))+
+    200*length(grep("SmartHomeDevices", LIST(repitedCategories)[m]))+70*length(grep("Speakers", LIST(repitedCategories)[m]))
  
-  estimatedProfit[i] <- price 
+  estimatedProfit[m] <- price 
   }
 
 
