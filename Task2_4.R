@@ -51,7 +51,7 @@ lift()
 summary(RulesNames)
 inspect(head(sort(RulesNames, na.last = NA, by = "lift"),20))
 
-ItemRules <- subset(RulesNames, items %in% "iMac")
+
 ItemRules
 
 plot()
@@ -91,68 +91,68 @@ summary(fsets)
 ########## Types of Products ############
 Type <- c()
 
-Type$Laptops <- c('LG_Touchscreen_Laptop','Acer_Aspire','HP_Laptop','ASUS_Chromebook','Apple_Macbook_Pro',
-             'Apple_MacBook_Air','Dell_Laptop','Eluktronics_Pro_Gaming_Laptop',
-             'Alienware_Laptop','HP_Notebook_Touchscreen_Laptop_PC')
+Type$Laptops <- c('LG Touchscreen Laptop','Acer Aspire','HP Laptop','ASUS Chromebook','Apple Macbook Pro',
+             'Apple MacBook Air','Dell Laptop','Eluktronics Pro Gaming Laptop',
+             'Alienware Laptop','HP Notebook Touchscreen Laptop PC')
 
-Type$Desktop <- c('Lenovo_Desktop_Computer','iMac','HP_Desktop','ASUS_Desktop','Dell Desktop',
-             'Intel_Desktop','Acer_Desktop','CYBERPOWER_Gamer_Desktop','Dell_2_Desktop')
+Type$Desktop <- c('Lenovo Desktop Computer','iMac','HP Desktop','ASUS Desktop','Dell Desktop',
+             'Intel Desktop','Acer Desktop','CYBERPOWER Gamer Desktop','Dell 2 Desktop')
 
-Type$Monitors <- c('Acer_Monitor','LG_Monitor','ASUS_Monitor','ASUS_2_Monitor','Dell_Monitor',
-              'Samsung_Monitor','Sceptre_Monitor','ViewSonic_Monitor','AOC_Monitor','HP_Monitor')
+Type$Monitors <- c('Acer Monitor','LG Monitor','ASUS Monitor','ASUS 2 Monitor','Dell Monitor',
+              'Samsung Monitor','Sceptre Monitor','ViewSonic Monitor','AOC Monitor','HP Monitor')
 
-Type$ComputerMice <- c('3-Button_Mouse','Logitech_Wireless_Mouse','Microsoft_Basic_Optical_Mouse',
-                  'Logitech_3-button_Mouse','Redragon_Gaming_Mouse','HP_Wireless_Mouse',
-                  'Generic_Black_3-Button','Wireless_Portable_Mouse','Gaming_Mouse_Professional',
-                  'Slim_Wireless_Mouse')
+Type$ComputerMice <- c('Logitech Wireless Mouse','Microsoft Basic Optical Mouse',
+                  'Logitech 3-button Mouse','Redragon Gaming Mouse','HP Wireless Mouse',
+                  'Generic Black 3-Button','Wireless Portable Mouse','Gaming Mouse Professional', '3-Button Mouse',
+                  'Slim Wireless Mouse')
 
-Type$Keyboard <- c('HP_USB_Keyboard','Logitech_Wireless_Keyboard','Rii_LED_Keyboard','Logitech_Keyboard',
-              'Backlit_LED_Gaming_Keyboard','Dell_Wired_Keyboard','Apple_Wired_Keyboard',
-              'Apple_Wireless_Keyboard','Apple_Magic_Keyboard')
+Type$Keyboard <- c('HP USB Keyboard','Logitech Wireless Keyboard','Rii LED Keyboard','Logitech Keyboard',
+              'Backlit LED Gaming Keyboard','Dell Wired Keyboard','Apple Wired Keyboard',
+              'Apple Wireless Keyboard','Apple Magic Keyboard')
 
-Type$MouseKeyboardCombo <- c('Logitech_MK550_Wireless_Wave_Keyboard_and_Mouse_Combo',
-                        'Logitech_Desktop_MK120_Mouse_and_keyboard_Combo',
-                        'Logitech_MK270_Wireless_Keyboard_and_Mouse_Combo','Dell_KM117_Wireless_Keyboard_&_Mouse',
-                        'EagleTec_Wireless_Combo_Keyboard_and_Mouse','Microsoft_Wireless_Comfort_Keyboard_and_Mouse',
-                        'Microsoft_Wireless_Desktop_Keyboard_and_Mouse','Rii_LED_Gaming_Keyboard_&_Mouse_Combo',
-                        'Logitech_MK360_Wireless_Keyboard_and_Mouse_Combo')
+Type$MouseKeyboardCombo <- c('Logitech MK550 Wireless Wave Keyboard and Mouse Combo',
+                        'Logitech Desktop MK120 Mouse and keyboard Combo',
+                        'Logitech MK270 Wireless Keyboard and Mouse Combo','Dell KM117 Wireless Keyboard & Mouse',
+                        'EagleTec Wireless Combo Keyboard and Mouse','Microsoft Wireless Comfort Keyboard and Mouse',
+                        'Microsoft Wireless Desktop Keyboard and Mouse','Rii LED Gaming Keyboard & Mouse Combo',
+                        'Logitech MK360 Wireless Keyboard and Mouse Combo')
 
-Type$ComputerHeadphones <- c('Zombie_Gaming_Headset','Logitech_ClearChat_Headset',
-                        'Panasonic_On-Ear_Stereo_Headphones','PC_Gaming_Headset',
-                        'Kensington_Headphones','Logitech_Stereo_Headset','Koss_Home_Headphones',
-                        'Microsoft_Headset','Ailihen_Stereo_Headphones','XIBERIA_Gaming_Headset')
+Type$ComputerHeadphones <- c('Zombie Gaming Headset','Logitech ClearChat Headset',
+                        'Panasonic On-Ear Stereo Headphones','PC Gaming Headset',
+                        'Kensington Headphones','Logitech Stereo Headset','Koss Home Headphones',
+                        'Microsoft Headset','Ailihen Stereo Headphones','XIBERIA Gaming Headset')
 
-Type$ActiveHeadphones <- c('Apple_Earpods','Monster_Beats_By_Dr_Dre','Otium_Wireless_Sports_Bluetooth_Headphone',
-                      'Panasonic_In-Ear_Headphone','APIE_Bluetooth_Headphone',
-                      'Philips_Flexible_Earhook_Headphone')
+Type$ActiveHeadphones <- c('Apple Earpods','Monster Beats By Dr Dre','Otium Wireless Sports Bluetooth Headphone',
+                      'Panasonic In-Ear Headphone','APIE Bluetooth Headphone',
+                      'Philips Flexible Earhook Headphone')
 
-Type$ComputerCords <- c('HDMI_Cable_6ft','Ethernet_Cable','Etekcity_Power_Extension_Cord_Cable','Audio_Cable',
-                   'VGA_Monitor_Cable','iPhone_Charger_Cable','HDMI_Adapter','USB_Cable',
-                   'Samsung_Charging Cable')
+Type$ComputerCords <- c('HDMI Cable 6ft','Ethernet Cable','Etekcity Power Extension Cord Cable','Audio Cable',
+                   'VGA Monitor Cable','iPhone Charger Cable','HDMI Adapter','USB Cable',
+                   'Samsung Charging Cable')
 
-Type$Accessories <- c('Microsoft_Office_Home_and_Student_2016','Computer_Game','Belkin_Mouse_Pad',
-                 'Large_Mouse_Pad')
+Type$Accessories <- c('Microsoft Office Home and Student 2016','Computer Game','Belkin Mouse Pad',
+                 'Large Mouse Pad')
 
-Type$Speakers <- c('Cambridge_Bluetooth_Speaker','JBL_Splashproof_Portable_Bluetooth_Speaker',
-              'DOSS_Touch_Wireless_Bluetooth','Logitech_Multimedia_Speakers','Rokono_Mini_Speaker',
-              'Cyber_Acoustics','Bose_Companion_Speakers','Mackie_CR_Speakers','Sonos')
+Type$Speakers <- c('Cambridge Bluetooth Speaker','JBL Splashproof Portable Bluetooth Speaker',
+              'DOSS Touch Wireless Bluetooth','Logitech Multimedia Speakers','Rokono Mini Speaker',
+              'Cyber Acoustics','Bose Companion Speakers','Mackie CR Speakers','Sonos')
 
-Type$Printers <- c('Epson_Printer','HP_Wireless_Printer','Canon_Office_Printer','Brother_Printer',
-              'DYMO_Label_Manker')
+Type$Printers <- c('Epson Printer','HP Wireless Printer','Canon Office Printer','Brother Printer',
+              'DYMO Label Manker')
 
-Type$PrinterInk <- c('Epson_Black_Ink','HP_Black_&_Tri-color_Ink','Canon_Ink','Brother_Printer_Toner',
-                'DYMO_Labeling_Tape')
+Type$PrinterInk <- c('Epson Black Ink','HP Black & Tri-color Ink','Canon Ink','Brother Printer Toner',
+                'DYMO Labeling Tape')
 
-Type$ComputerStands <-c('Halter_Acrylic_Monitor_Stand','Height-Adjustable_Standing_Desk','Multi_Media_Stand',
-                   'Halter_Mesh_Metal_Monitor_Stand','Full_Motion_Monitor_Mount')
+Type$ComputerStands <-c('Halter Acrylic Monitor Stand','Height-Adjustable Standing Desk','Multi Media Stand',
+                   'Halter Mesh Metal Monitor Stand','Full Motion Monitor Mount')
 
-Type$ComputerTablets <- c('iPad_Pro','iPad','Fire_HD_Tablet','Samsung_Galaxy_Tablet','Kindle')
+Type$ComputerTablets <- c('iPad Pro','iPad','Fire HD Tablet','Samsung Galaxy Tablet','Kindle')
 
-Type$ExternalHardrives <- c('Slim_2TB_Portable_External_Hard_Drive','1TB_Portable_External_Hard_Drive',
-                            '2TB_Portable_External_Hard_Drive','5TB_Desktop_Hard_Drive',
-                            '3TB_Portable_External_Hard_Drive')
+Type$ExternalHardrives <- c('Slim 2TB Portable External Hard Drive','1TB Portable External Hard Drive',
+                            '2TB Portable External Hard Drive','5TB Desktop Hard Drive',
+                            '3TB Portable External Hard Drive')
 
-Type$SmartHomeDevices <- c('Apple_TV','Google_Home','Smart_Light_Bulb','Fire_TV_Stick','Roku_Express')
+Type$SmartHomeDevices <- c('Apple TV','Google Home','Smart Light Bulb','Fire TV Stick','Roku Express')
 
 
 aggregate()
@@ -163,7 +163,7 @@ namesn <-  names(Type)
 for(i in 1:length(Type)){
   for(j in 1:length(Type[[i]])){
   transactionsType@itemInfo$labels <- gsub(paste(Type[[i]][j]),paste(namesn[i]),
-                                           transactionsType@itemInfo$labels, )
+                                           transactionsType@itemInfo$labels)
   }
 }
 
@@ -206,7 +206,7 @@ ItemRules <- subset(RulesNames, items %in% "iMac")
 ItemRules
 
 
-
+DataFrame
 
 
 
